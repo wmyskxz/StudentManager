@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * StudentDao 的实现类
  *
+ * @author: @我没有三颗心脏
+ * @create: 2018-04-26-上午 8:20
  */
-public class StudentDAO {
+public class StudentDaoImpl implements StudentDao {
 
-	/**
-	 * 获取数据库中的数据总数目
-	 * @return
-	 */
+	@Override
 	public int getTotal() {
 
 		int total = 0;
@@ -34,12 +34,8 @@ public class StudentDAO {
 		return total;
 	}
 
-	/**
-	 * 向数据库中增加一条数据
-	 * @param student
-	 */
+	@Override
 	public void add(Student student) {
-
 		String sql = "INSERT INTO student VALUES(NULL,?,?,?,?,?)";
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 
@@ -53,8 +49,10 @@ public class StudentDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 	}
 
+	@Override
 	public void delete(int id) {
 
 		String sql = "DELETE FROM student WHERE ID = ?";
@@ -69,6 +67,7 @@ public class StudentDAO {
 		}
 	}
 
+	@Override
 	public void update(Student student) {
 
 		String sql = "update student set student_id = ?, name = ?, age = ?, sex = ?, birthday = ? where id = ? ";
@@ -88,8 +87,8 @@ public class StudentDAO {
 		}
 	}
 
+	@Override
 	public Student get(int id) {
-
 		Student student = new Student();
 
 		String sql = "SELECT * FROM student WHERE ID = " + id;
@@ -119,12 +118,13 @@ public class StudentDAO {
 		return student;
 	}
 
+	@Override
 	public List<Student> list() {
 		return list(0, Short.MAX_VALUE);
 	}
 
+	@Override
 	public List<Student> list(int start, int count) {
-
 		List<Student> students = new ArrayList<>();
 
 		String sql = "SELECT * FROM student ORDER BY student_id desc limit ?,?";
@@ -161,5 +161,4 @@ public class StudentDAO {
 
 		return students;
 	}
-
 }

@@ -1,6 +1,6 @@
 package servlet;
 
-import dao.StudentDAO;
+import dao.StudentDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ public class DeleteServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		int id = Integer.parseInt(req.getParameter("id"));
-		new StudentDAO().delete(id);
+		new StudentDaoImpl().delete(id);
 
 		resp.sendRedirect("/listStudent");
 	}

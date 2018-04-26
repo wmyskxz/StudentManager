@@ -1,7 +1,8 @@
 package servlet;
 
 import bean.Student;
-import dao.StudentDAO;
+import dao.StudentDao;
+import dao.StudentDaoImpl;
 import util.Page;
 
 import javax.servlet.ServletException;
@@ -15,7 +16,7 @@ import java.util.List;
 @WebServlet("/listStudent")
 public class ListServlet extends HttpServlet {
 
-	private StudentDAO studentDAO = new StudentDAO();
+	private StudentDao studentDao = new StudentDaoImpl();
 
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -30,8 +31,8 @@ public class ListServlet extends HttpServlet {
 
 		Page page = new Page(start, count);
 
-		List<Student> students = studentDAO.list(page.getStart(), page.getCount());
-		int total = studentDAO.getTotal();
+		List<Student> students = studentDao.list(page.getStart(), page.getCount());
+		int total = studentDao.getTotal();
 		page.setTotal(total);
 
 		req.setAttribute("students", students);

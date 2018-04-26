@@ -13,6 +13,31 @@
     <link href="css/style.css" rel="stylesheet">
 
     <title>学生管理页面 - 编辑页面</title>
+
+    <script>
+
+        $(function () {
+            $("#editForm").submit(function () {
+                if (!checkEmpty("studentID", "学号"))
+                    return false;
+                if (!checkEmpty("name", "姓名"))
+                    return false;
+                if (!checkEmpty("age", "年龄"))
+                    return false;
+                return true;
+            })
+        });
+
+        function checkEmpty(id, name) {
+            var value = $("#" + id).val();
+            if (value.length == 0) {
+                alert(name + "不能为空");
+                $("#" + id).focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -25,7 +50,7 @@
         </div>
         <div class="panel-body">
 
-            <form method="post" action="/updateStudent" role="form">
+            <form method="post" id="editForm" action="/updateStudent" role="form">
                 <table class="editTable">
                     <tr>
                         <td>学号：</td>
@@ -43,8 +68,12 @@
                     </tr>
                     <tr>
                         <td>性别：</td>
-                        <td><input type="radio" class="radio radio-inline" name="radio" value="男"> 男
-                            <input type="radio" class="radio radio-inline" name="radio" value="女"> 女
+                        <td><input type="radio"
+                                   <c:if test="${student.sex == '男'}">checked</c:if> class="radio radio-inline"
+                                   name="radio" value="男"> 男
+                            <input type="radio"
+                                   <c:if test="${student.sex == '女'}">checked</c:if> class="radio radio-inline"
+                                   name="radio" value="女"> 女
                         </td>
                     </tr>
                     <tr>

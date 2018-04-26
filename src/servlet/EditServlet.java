@@ -1,7 +1,7 @@
 package servlet;
 
 import bean.Student;
-import dao.StudentDAO;
+import dao.StudentDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +16,7 @@ public class EditServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		int id = Integer.parseInt(req.getParameter("id"));
-		Student student = new StudentDAO().get(id);
+		Student student = new StudentDaoImpl().get(id);
 
 		req.setAttribute("student", student);
 

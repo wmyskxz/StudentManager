@@ -1,7 +1,7 @@
 package servlet;
 
 import bean.Student;
-import dao.StudentDAO;
+import dao.StudentDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +41,7 @@ public class UpdateServlet extends HttpServlet {
 		student.setSex(sex);
 		student.setBirthday(birthday);
 
-		new StudentDAO().update(student);
+		new StudentDaoImpl().update(student);
 
 		resp.sendRedirect("/listStudent");
 	}

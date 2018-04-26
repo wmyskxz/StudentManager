@@ -19,7 +19,36 @@
             $("ul.pagination li.disabled a").click(function () {
                 return false;
             });
+
+            $("#addForm").submit(function () {
+                if (!checkEmpty("studentID", "学号"))
+                    return false;
+                if (!checkEmpty("name", "姓名"))
+                    return false;
+                if (!checkEmpty("age", "年龄"))
+                    return false;
+                return true;
+            })
         });
+
+        function del() {
+            var msg = "您真的确定要删除吗？\n\n请确认！";
+            if (confirm(msg) == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function checkEmpty(id, name) {
+            var value = $("#" + id).val();
+            if (value.length == 0) {
+                alert(name + "不能为空");
+                $("#" + id).focus();
+                return false;
+            }
+            return true;
+        }
     </script>
 </head>
 
@@ -52,7 +81,8 @@
                 <td>${s.birthday}</td>
 
                 <td><a href="/editStudent?id=${s.id}"><span class="glyphicon glyphicon-edit"></span> </a></td>
-                <td><a href="/deleteStudent?id=${s.id}"><span class="glyphicon glyphicon-trash"></span> </a></td>
+                <td><a href="/deleteStudent?id=${s.id}" onclick="javascript:return del();"><span
+                        class="glyphicon glyphicon-trash"></span> </a></td>
             </tr>
         </c:forEach>
 
@@ -107,7 +137,7 @@
         </div>
         <div class="panel-body">
 
-            <form method="post" action="/addStudent" role="form">
+            <form method="post" id="addForm" action="/addStudent" role="form">
                 <table class="addTable">
                     <tr>
                         <td>学号：</td>
@@ -123,7 +153,7 @@
                     </tr>
                     <tr>
                         <td>性别：</td>
-                        <td><input type="radio" class="radio radio-inline" name="radio" value="男"> 男
+                        <td><input type="radio" checked class="radio radio-inline" name="radio" value="男"> 男
                             <input type="radio" class="radio radio-inline" name="radio" value="女"> 女
                         </td>
                     </tr>
