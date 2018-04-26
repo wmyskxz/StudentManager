@@ -110,11 +110,11 @@ td><a href="/deleteStudent?id=${s.id}" onclick="javascript:return del();"><span
 
 这个也很简单，在 editStudent 页面增加一些判断就好了：
 
-![](https://github.com/wmyskxz/StudentManager/blob/masteredit_if.png)
+![](https://github.com/wmyskxz/StudentManager/blob/master/edit_if.png)
 
 用 `<c:if>` 标签来判断 sex 的值，然后根据对应的属性增加 checked 属性，这样就可以自动勾选上所对应的属性：
 
-![](https://github.com/wmyskxz/StudentManager/blob/masteredit_check.png)
+![](https://github.com/wmyskxz/StudentManager/blob/master/edit_check.png)
 
 #### 改进五：空值判断
 
@@ -134,13 +134,13 @@ function checkEmpty(id, name) {
 
 然后再为 form 创建一个 id 属性值为 “addForm” 并添加进判断空值的方法：
 
-![](https://github.com/wmyskxz/StudentManager/blob/mastercheckEmpty1.png)
+![](https://github.com/wmyskxz/StudentManager/blob/master/checkEmpty1.png)
 
 - **注意：** 这里需要写在 $(function(){}) 里面，等待文档加载完毕才能生效。
 - 这里并没有为 sex 属性判断空值，我们采用一个简单的**为 sex 添加一个默认勾选项**来省略空值的判断。
 
 同样的，我们也在编辑页面，采用同样的方法进行空值判断：
 
-![](https://github.com/wmyskxz/StudentManager/blob/mastercheckEmpty2.png)
+![](https://github.com/wmyskxz/StudentManager/blob/master/checkEmpty2.png)
 
 - 当进入编辑页面的时候已经有默认的勾选项了，所以 sex 值仍然不需要判空
